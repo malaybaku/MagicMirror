@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicMirror", "MagicMirror\MagicMirror.csproj", "{BDE8E976-84E4-4743-B7FF-64CF95376281}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicMirror.Plugin", "MagicMirror.Plugin\MagicMirror.Plugin.csproj", "{B4D40AC3-2BF4-45E8-932D-DDDB6B3FFF2D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicMirror.SoundStream", "MagicMirror.SoundStream\MagicMirror.SoundStream.csproj", "{F251610A-7DC6-46B9-AF4E-AF49E7628C86}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BDE8E976-84E4-4743-B7FF-64CF95376281}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDE8E976-84E4-4743-B7FF-64CF95376281}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDE8E976-84E4-4743-B7FF-64CF95376281}.Debug|x86.ActiveCfg = Debug|x86
+		{BDE8E976-84E4-4743-B7FF-64CF95376281}.Debug|x86.Build.0 = Debug|x86
+		{BDE8E976-84E4-4743-B7FF-64CF95376281}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDE8E976-84E4-4743-B7FF-64CF95376281}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDE8E976-84E4-4743-B7FF-64CF95376281}.Release|x86.ActiveCfg = Release|x86
+		{BDE8E976-84E4-4743-B7FF-64CF95376281}.Release|x86.Build.0 = Release|x86
+		{B4D40AC3-2BF4-45E8-932D-DDDB6B3FFF2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4D40AC3-2BF4-45E8-932D-DDDB6B3FFF2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4D40AC3-2BF4-45E8-932D-DDDB6B3FFF2D}.Debug|x86.ActiveCfg = Debug|x86
+		{B4D40AC3-2BF4-45E8-932D-DDDB6B3FFF2D}.Debug|x86.Build.0 = Debug|x86
+		{B4D40AC3-2BF4-45E8-932D-DDDB6B3FFF2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4D40AC3-2BF4-45E8-932D-DDDB6B3FFF2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4D40AC3-2BF4-45E8-932D-DDDB6B3FFF2D}.Release|x86.ActiveCfg = Release|Any CPU
+		{B4D40AC3-2BF4-45E8-932D-DDDB6B3FFF2D}.Release|x86.Build.0 = Release|Any CPU
+		{F251610A-7DC6-46B9-AF4E-AF49E7628C86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F251610A-7DC6-46B9-AF4E-AF49E7628C86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F251610A-7DC6-46B9-AF4E-AF49E7628C86}.Debug|x86.ActiveCfg = Debug|x86
+		{F251610A-7DC6-46B9-AF4E-AF49E7628C86}.Debug|x86.Build.0 = Debug|x86
+		{F251610A-7DC6-46B9-AF4E-AF49E7628C86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F251610A-7DC6-46B9-AF4E-AF49E7628C86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F251610A-7DC6-46B9-AF4E-AF49E7628C86}.Release|x86.ActiveCfg = Release|Any CPU
+		{F251610A-7DC6-46B9-AF4E-AF49E7628C86}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
