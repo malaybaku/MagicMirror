@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Controls;
 
-namespace MagicMirror.Plugin
+namespace Baku.MagicMirror.Plugin
 {
     /// <summary>MagicMirrorに追加登録可能な機能を定義します。</summary>
     public interface IMagicMirrorPlugin : IDisposable

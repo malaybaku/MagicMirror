@@ -1,45 +1,85 @@
 ﻿using System.IO;
 using System.Reflection;
 using System.Collections.Generic;
+using System.Linq;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 
-using MagicMirror.Plugin;
+using Baku.MagicMirror.Plugin;
 
 namespace Baku.MagicMirror.Models
 {
-    /// <summary>プラグインのロード機能を実装します。</summary>
-    internal class PluginLoader
+    internal static class PluginLoader
     {
-        private PluginLoader() { }
+        public static IEnumerable<IMagicMirrorPlugin> Plugins
+            => DirectoryPluginLoader.Plugins
+                .Concat(ThisAssemblyPluginLoader.Plugins);
 
-        private const string PluginsDirectory = "Plugins";
-
-        private static string PluginsAbsoluteDirectory
-            => Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), PluginsDirectory);
-
-        private static IEnumerable<IMagicMirrorPlugin> _loadedPlugins;
-        internal static IEnumerable<IMagicMirrorPlugin> Plugins
+        /// <summary>外部で実装されたプラグインのロード機能を実装します。</summary>
+        internal class DirectoryPluginLoader
         {
-            get
+            private DirectoryPluginLoader() { }
+
+            private const string PluginsDirectory = "Plugins";
+
+            private static string PluginsAbsoluteDirectory
+                => Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), PluginsDirectory);
+
+            private static IEnumerable<IMagicMirrorPlugin> _loadedPlugins;
+            internal static IEnumerable<IMagicMirrorPlugin> Plugins
             {
-                if (_loadedPlugins == null)
+                get
                 {
-                    Directory.CreateDirectory(PluginsAbsoluteDirectory);
+                    if (_loadedPlugins == null)
+                    {
+                        Directory.CreateDirectory(PluginsAbsoluteDirectory);
 
-                    var holder = new PluginLoader();
-                    var catalog = new DirectoryCatalog(PluginsAbsoluteDirectory);
-                    var container = new CompositionContainer(catalog);
-                    container.ComposeParts(holder);
+                        var holder = new DirectoryPluginLoader();
+                        var catalog = new DirectoryCatalog(PluginsAbsoluteDirectory);
+                        var container = new CompositionContainer(catalog);
+                        container.ComposeParts(holder);
 
-                    _loadedPlugins = holder._plugins;
+                        _loadedPlugins = holder._plugins;
+                    }
+                    return _loadedPlugins;
                 }
-                return _loadedPlugins;
             }
+
+            [ImportMany]
+            List<IMagicMirrorPlugin> _plugins = new List<IMagicMirrorPlugin>();
+
         }
 
-        [ImportMany]
-        List<IMagicMirrorPlugin> _plugins = new List<IMagicMirrorPlugin>();
+        /// <summary>アセンブリ内部で実装されたプラグインのロード機能を実装します。</summary>
+        internal class ThisAssemblyPluginLoader
+        {
+            private ThisAssemblyPluginLoader() { }
 
+            private static IEnumerable<IMagicMirrorPlugin> _loadedPlugins;
+            internal static IEnumerable<IMagicMirrorPlugin> Plugins
+            {
+                get
+                {
+                    if (_loadedPlugins == null)
+                    {
+                        var holder = new ThisAssemblyPluginLoader();
+                        var catalog = new AssemblyCatalog(typeof(ThisAssemblyPluginLoader).Assembly);
+                        var container = new CompositionContainer(catalog);
+                        container.ComposeParts(holder);
+
+                        _loadedPlugins = holder._plugins;
+                    }
+                    return _loadedPlugins;
+                }
+            }
+
+            [ImportMany]
+            List<IMagicMirrorPlugin> _plugins = new List<IMagicMirrorPlugin>();
+
+        }
     }
+
+
+
+
 }

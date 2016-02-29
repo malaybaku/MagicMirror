@@ -7,7 +7,7 @@
     <ProjectGuid>{B4D40AC3-2BF4-45E8-932D-DDDB6B3FFF2D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MagicMirror.Plugin</RootNamespace>
+    <RootNamespace>Baku.MagicMirror.Plugin</RootNamespace>
     <AssemblyName>MagicMirror.Plugin</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

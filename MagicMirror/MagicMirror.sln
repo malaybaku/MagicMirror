@@ -9,6 +9,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicMirror.Plugin", "Magic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicMirror.SoundStream", "MagicMirror.SoundStream\MagicMirror.SoundStream.csproj", "{F251610A-7DC6-46B9-AF4E-AF49E7628C86}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicMirror.LED", "MagicMirror.LED\MagicMirror.LED.csproj", "{C1928EF6-7429-4C47-9F98-420B97E897A3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{1B8D192C-F73A-481B-B912-A26ECED8D579}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicMirror.Kinect", "MagicMirror.KinectController\MagicMirror.Kinect.csproj", "{AC3E3BB1-AB13-40FF-AB3E-F6EE23EB1C27}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,8 +47,29 @@ Global
 		{F251610A-7DC6-46B9-AF4E-AF49E7628C86}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F251610A-7DC6-46B9-AF4E-AF49E7628C86}.Release|x86.ActiveCfg = Release|Any CPU
 		{F251610A-7DC6-46B9-AF4E-AF49E7628C86}.Release|x86.Build.0 = Release|Any CPU
+		{C1928EF6-7429-4C47-9F98-420B97E897A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1928EF6-7429-4C47-9F98-420B97E897A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1928EF6-7429-4C47-9F98-420B97E897A3}.Debug|x86.ActiveCfg = Debug|x86
+		{C1928EF6-7429-4C47-9F98-420B97E897A3}.Debug|x86.Build.0 = Debug|x86
+		{C1928EF6-7429-4C47-9F98-420B97E897A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1928EF6-7429-4C47-9F98-420B97E897A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1928EF6-7429-4C47-9F98-420B97E897A3}.Release|x86.ActiveCfg = Release|Any CPU
+		{C1928EF6-7429-4C47-9F98-420B97E897A3}.Release|x86.Build.0 = Release|Any CPU
+		{AC3E3BB1-AB13-40FF-AB3E-F6EE23EB1C27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC3E3BB1-AB13-40FF-AB3E-F6EE23EB1C27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC3E3BB1-AB13-40FF-AB3E-F6EE23EB1C27}.Debug|x86.ActiveCfg = Debug|x86
+		{AC3E3BB1-AB13-40FF-AB3E-F6EE23EB1C27}.Debug|x86.Build.0 = Debug|x86
+		{AC3E3BB1-AB13-40FF-AB3E-F6EE23EB1C27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC3E3BB1-AB13-40FF-AB3E-F6EE23EB1C27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC3E3BB1-AB13-40FF-AB3E-F6EE23EB1C27}.Release|x86.ActiveCfg = Release|Any CPU
+		{AC3E3BB1-AB13-40FF-AB3E-F6EE23EB1C27}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F251610A-7DC6-46B9-AF4E-AF49E7628C86} = {1B8D192C-F73A-481B-B912-A26ECED8D579}
+		{C1928EF6-7429-4C47-9F98-420B97E897A3} = {1B8D192C-F73A-481B-B912-A26ECED8D579}
+		{AC3E3BB1-AB13-40FF-AB3E-F6EE23EB1C27} = {1B8D192C-F73A-481B-B912-A26ECED8D579}
 	EndGlobalSection
 EndGlobal

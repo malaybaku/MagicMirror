@@ -1,7 +1,7 @@
 ﻿using Baku.LibqiDotNet;
 using System.Collections.Generic;
 
-namespace MagicMirror.Plugin
+namespace Baku.MagicMirror.Plugin
 {
     /// <summary>サービスに関する情報を定義します。</summary>
     public interface IQiServiceInfoProxy

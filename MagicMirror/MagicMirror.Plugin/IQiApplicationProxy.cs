@@ -1,4 +1,4 @@
-﻿namespace MagicMirror.Plugin
+﻿namespace Baku.MagicMirror.Plugin
 {
     /// <summary><see cref="MagicMirror"/>で使用可能な通信エンドポイントを表します。</summary>
     public interface IQiApplicationProxy

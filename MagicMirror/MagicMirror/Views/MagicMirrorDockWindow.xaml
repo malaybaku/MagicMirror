@@ -1,0 +1,97 @@
+﻿<controls:MetroWindow
+        x:Class="Baku.MagicMirror.Views.MagicMirrorDockWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:chrome="http://schemes.grabacr.net/winfx/2014/chrome"
+        xmlns:controls="http://schemes.grabacr.net/winfx/2014/controls"
+        xmlns:avad="http://schemas.xceed.com/wpf/xaml/avalondock"
+        xmlns:local="clr-namespace:Baku.MagicMirror.Views"
+        xmlns:v="clr-namespace:Baku.MagicMirror.Views"
+        xmlns:vm="clr-namespace:Baku.MagicMirror.ViewModels"
+        mc:Ignorable="d"   
+        Background="{DynamicResource ThemeBrushKey}"
+        Height="550" Width="525">
+    <Window.DataContext>
+        <vm:MagicMirrorDockWindowViewModel />
+    </Window.DataContext>    
+    <chrome:WindowChrome.Instance>
+        <chrome:WindowChrome />
+    </chrome:WindowChrome.Instance>    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0" Height="30" LastChildFill="False">
+            <v:MagicMirrorLogo DockPanel.Dock="Left" Width="20" Height="20" Margin="10,0,10,0" />
+            <TextBlock Text="MagicMirror" Foreground="{DynamicResource ForegroundBrushKey}" 
+                       VerticalAlignment="Center"
+                       FontFamily="Segoe UI"
+                       FontSize="15"
+                       Margin="0,0"
+                       />
+            <controls:SystemButtons DockPanel.Dock="Right"/>
+        </DockPanel>
+        <Menu Grid.Row="1" Background="Transparent" BorderBrush="{DynamicResource AccentBrushKey}">
+            <MenuItem Header="メイン(F)">
+                <MenuItem Header="新規作成"/>
+                <MenuItem Header="開く"/>
+                <MenuItem Header="終了"/>
+            </MenuItem>
+            <MenuItem Header="接続">
+                <MenuItem Header="接続ウィンドウを開く" Command="{Binding OpenConnectionViewCommand}"/>
+                <MenuItem Header="ロボットの検索結果を開く" Command="{Binding OpenSearchViewCommand}"/>
+            </MenuItem>
+            <MenuItem Header="ウィンドウ" ItemsSource="{Binding Tools}" ItemContainerStyle="{StaticResource ToolPaneMenuItemContainerStyle}" />
+        </Menu>
+        <Grid Grid.Row="3" Background="{DynamicResource AccentBrushKey}">
+            <controls:ResizeGrip HorizontalAlignment="Right" />
+        </Grid>
+
+        <!-- ココがメインの表示部分 -->
+        <avad:DockingManager x:Name="_dockingManager" Grid.Row="2" Margin="1"
+                             DocumentsSource="{Binding Documents}"
+                             AnchorablesSource="{Binding Tools}">
+            <avad:DockingManager.LayoutItemContainerStyleSelector>
+                <v:PaneStyleSelector>
+                    <v:PaneStyleSelector.ToolPaneStyle>
+                        <Style TargetType="{x:Type avad:LayoutAnchorableItem}">
+                            <Setter Property="Title" Value="{Binding Model.Title}"/>
+                            <Setter Property="ContentId" Value="{Binding Model.ContentId}"/>
+                            <Setter Property="Visibility" Value="{Binding Model.IsVisible, Mode=TwoWay, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}}"/>
+                            <Setter Property="IsSelected" Value="{Binding Model.IsSelected, Mode=TwoWay}"/>
+                            <Setter Property="IsActive" Value="{Binding Model.IsActive, Mode=TwoWay}"/>
+                        </Style>
+                    </v:PaneStyleSelector.ToolPaneStyle>
+                    <v:PaneStyleSelector.DocumentPaneStyle>
+                        <Style TargetType="{x:Type avad:LayoutItem}">
+                            <Setter Property="Title" Value="{Binding Model.Title}"/>
+                            <Setter Property="ContentId" Value="{Binding Model.ContentId}"/>
+                            <Setter Property="IsSelected" Value="{Binding Model.IsSelected, Mode=TwoWay}"/>
+                            <Setter Property="IsActive" Value="{Binding Model.IsActive, Mode=TwoWay}"/>
+                            <Setter Property="CloseCommand" Value="{Binding Model.OnCloseCommand}" />
+                        </Style>
+                    </v:PaneStyleSelector.DocumentPaneStyle>
+                </v:PaneStyleSelector>
+            </avad:DockingManager.LayoutItemContainerStyleSelector>
+            <avad:DockingManager.LayoutUpdateStrategy>
+                <v:LayoutInitializer />
+            </avad:DockingManager.LayoutUpdateStrategy>
+            <avad:LayoutRoot>
+                <avad:LayoutPanel Orientation="Vertical">
+                    <avad:LayoutPanel Orientation="Horizontal">
+                        <avad:LayoutDocumentPane />
+                        <avad:LayoutAnchorablePane DockWidth="200" />
+                    </avad:LayoutPanel>
+                    <avad:LayoutAnchorablePane />
+                </avad:LayoutPanel>
+                </avad:LayoutRoot>
+        </avad:DockingManager>                
+    </Grid>
+</controls:MetroWindow>

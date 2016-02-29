@@ -1,16 +1,35 @@
 ﻿<Application x:Class="Baku.MagicMirror.Application"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:v="clr-namespace:Baku.MagicMirror.Views"
+             >
     <Application.Resources>
         <ResourceDictionary>
-            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-            
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Views/TabItemTemplates.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/FirstFloor.ModernUI;component/Assets/ModernUI.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/FirstFloor.ModernUI;component/Assets/ModernUI.Dark.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MetroRadiance;component/Styles/Controls.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MetroRadiance;component/Themes/Dark.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MetroRadiance;component/Themes/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Xceed.Wpf.AvalonDock.Themes.VS2013;component/DarkTheme.xaml"/>
+
+                <ResourceDictionary Source="Views/Assets/MenuItem.xaml"/>
+                <ResourceDictionary Source="Views/MagicMirrorTemplates.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+            <v:InvertBooleanToVisibilityConverter x:Key="InvertBooleanToVisibilityConverter"/>
+
+            <Style x:Key="VirtualRobotIconTextStyle" TargetType="{x:Type TextBlock}">
+                <Setter Property="Foreground" Value="LightGreen" />
+                <Setter Property="FontFamily" Value="Segoe UI Symbol" />
+                <Setter Property="Text" Value="&#xE212;"/>
+            </Style>
+            <Style x:Key="RealRobotIconTextStyle" TargetType="{x:Type TextBlock}">
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="FontFamily" Value="Segoe UI Symbol" />
+                <Setter Property="Text" Value="&#xE2AF;"/>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

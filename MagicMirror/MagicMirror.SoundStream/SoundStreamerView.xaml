@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="MagicMirror.SoundStream.SoundStreamerView"
+﻿<UserControl x:Class="Baku.MagicMirror.SoundStream.SoundStreamerView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,12 +6,14 @@
              xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
 			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:MagicMirror.SoundStream"
+             xmlns:local="clr-namespace:Baku.MagicMirror.SoundStream"
              mc:Ignorable="d" 
-             Background="{DynamicResource ThemeBrushKey}"
+             Background="{DynamicResource BackgroundBrushKey}"
+             d:DataContext="{d:DesignInstance local:SoundStreamer}"
              d:DesignHeight="300" d:DesignWidth="400">
     <UserControl.Resources>
         <ResourceDictionary>
+            <local:BooleanInvertConverter x:Key="BooleanInvertConverter"/>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MetroRadiance;component/Styles/Controls.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MetroRadiance;component/Themes/Dark.xaml" />
@@ -20,23 +22,68 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button Content="Start">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="Click">
-                        <ei:CallMethodAction TargetObject="{Binding}"
-                                             MethodName="StartStreaming" />
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </Button>
-            <Button Content="Stop">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="Click">
-                        <ei:CallMethodAction TargetObject="{Binding}"
-                                             MethodName="StopStreaming" />
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </Button>
-        </StackPanel>  
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="1" Margin="5">
+            <TextBlock Margin="4"
+                       Text="ロボットが聞いてる音を聞く" 
+                       Foreground="{DynamicResource ForegroundBrushKey}"/>
+            <Border Margin="4" Padding="5" 
+                    BorderBrush="{DynamicResource BorderBrushKey}"
+                    BorderThickness="2">
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Start" Width="60" Margin="10,0"
+                            IsEnabled="{Binding IsExecutingDownStream,Converter={StaticResource BooleanInvertConverter}}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <ei:CallMethodAction TargetObject="{Binding}"
+                                             MethodName="StartDownStream" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+                    <Button Content="Stop" Width="60" Margin="10, 0"
+                            IsEnabled="{Binding IsExecutingDownStream}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <ei:CallMethodAction TargetObject="{Binding}"
+                                             MethodName="StopDownStream" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Margin="5">
+            <TextBlock Margin="4"
+                       Text="PCマイクからロボットへ音声を流す" 
+                       Foreground="{DynamicResource ForegroundBrushKey}"/>
+            <Border Margin="4" Padding="5" 
+                    BorderBrush="{DynamicResource BorderBrushKey}"
+                    BorderThickness="2">
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Start" Width="60" Margin="10,0"
+                            IsEnabled="{Binding IsExecutingUpStream,Converter={StaticResource BooleanInvertConverter}}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <ei:CallMethodAction TargetObject="{Binding}"
+                                             MethodName="StartUpStream" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+                    <Button Content="Stop" Width="60" Margin="10, 0"
+                            IsEnabled="{Binding IsExecutingUpStream}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <ei:CallMethodAction TargetObject="{Binding}"
+                                             MethodName="StopDownStream" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+                </StackPanel>
+            </Border>
+        </StackPanel>
     </Grid>
 </UserControl>

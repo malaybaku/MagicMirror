@@ -1,0 +1,131 @@
+﻿<UserControl x:Class="Baku.MagicMirror.Views.CameraView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+             xmlns:controls="clr-namespace:Baku.MagicMirror.Views.Controls"
+             xmlns:vm="clr-namespace:Baku.MagicMirror.ViewModels"
+             mc:Ignorable="d" 
+             Background="{DynamicResource ThemeBrushKey}"
+             d:DataContext="{d:DesignInstance vm:CameraMonitorViewModel}"
+             d:DesignHeight="300" d:DesignWidth="400">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <!-- ここをバインドするように変更せんとね -->
+        <controls:BindableImage Grid.Row="0" BindableSource="{Binding CameraImage, Mode=OneWay}"
+                                RenderOptions.BitmapScalingMode="HighQuality" />
+        <Grid Grid.Row="1">
+            <Border BorderBrush="{DynamicResource BorderBrushKey}" BorderThickness="2">
+                <Expander Margin="2" Header="Camera Control">
+                    <Grid Margin="3">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0"
+                                   Margin="10,0"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"
+                                   Foreground="{DynamicResource ForegroundBrushKey}"
+                                   Text="カメラの種類"/>
+                        <metro:PromptComboBox Grid.Row="0" Grid.Column="1"
+                                              Margin="5"
+                                              IsEditable="False"
+                                              ItemsSource="{Binding Options.CameraTypes}"
+                                              SelectedValue="{Binding SelectedCamera}"
+                                              />
+                        <TextBlock Grid.Row="1" Grid.Column="0"
+                                   Margin="10,0"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"
+                                   Foreground="{DynamicResource ForegroundBrushKey}"
+                                   Text="色設定"/>
+                        <metro:PromptComboBox Grid.Row="1" Grid.Column="1"
+                                              Margin="5"
+                                              IsEditable="False"
+                                              ItemsSource="{Binding Options.ColorSpaces}"
+                                              SelectedValue="{Binding SelectedColorSpace}"
+                                              />
+                        <TextBlock Grid.Row="2" Grid.Column="0"
+                                   Margin="10,0"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"
+                                   Foreground="{DynamicResource ForegroundBrushKey}"
+                                   Text="解像度"/>
+                        <metro:PromptComboBox Grid.Row="2" Grid.Column="1"
+                                              Margin="5"
+                                              IsEditable="False" 
+                                              ItemsSource="{Binding Options.Resolutions}"
+                                              SelectedValue="{Binding SelectedResolution}"
+                                              />
+                        <TextBlock Grid.Row="3" Grid.Column="0"
+                                   Margin="10,0"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"
+                                   Foreground="{DynamicResource ForegroundBrushKey}"
+                                   Text="最大FPS"/>
+                        <DockPanel Grid.Row="3" Grid.Column="1">
+                            <TextBlock DockPanel.Dock="Right"
+                                       VerticalAlignment="Center"
+                                       Margin="5,0"
+                                       Width="20"
+                                       Text="{Binding Path=Value, ElementName=fpsSlider}"
+                                       Foreground="{DynamicResource ForegroundBrushKey}"
+                                       />
+                            <Slider x:Name="fpsSlider"
+                                    Margin="5"
+                                    TickFrequency="1"
+                                    IsSnapToTickEnabled="True"
+                                    Minimum="1"
+                                    Maximum="30"
+                                    />
+                        </DockPanel>
+                        <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" 
+                                    Margin="5"
+                                    Orientation="Horizontal"
+                                    HorizontalAlignment="Center">
+                            <Button Content="Start" Margin="5, 0" Width="100">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Click">
+                                        <ei:CallMethodAction TargetObject="{Binding}"
+                                                             MethodName="StartMonitor" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Button>
+                            <Button Content="Apply" Margin="5, 0" Width="100">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Click">
+                                        <ei:CallMethodAction TargetObject="{Binding}"
+                                                             MethodName="ApplyMonitor" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Button>
+                            <Button Content="Stop" Margin="5, 0" Width="100">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Click">
+                                        <ei:CallMethodAction TargetObject="{Binding}"
+                                                             MethodName="StopMonitor" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </Expander>
+
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

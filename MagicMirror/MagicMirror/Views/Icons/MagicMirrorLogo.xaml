@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="Baku.MagicMirror.Views.MagicMirrorLogo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="90" d:DesignWidth="90">
+    <Viewbox Stretch="Fill" d:LayoutOverrides="LeftPosition, RightPosition, TopPosition, BottomPosition">
+        <Canvas Height="90" Width="90">
+            <Path Data="M3.3332412,19.999892 L1.6658424,-0.0043235091 6.6680387,-0.0043235091 15.005033,9.9971177 23.342026,-0.0043235091 30.011621,-0.0043235091 30.011621,30 20.007229,26.666186 24.175726,9.9971177 15.005033,18.331652 7.5017381,8.3302108 C7.5017381,8.3302108 10.003013,23.333333 10.003013,23.333333 z" 
+				Fill="{DynamicResource AccentForegroundBrushKey}" Stretch="Fill" Height="90" Canvas.Left="5" Width="85"/>
+            <Path Data="M5.0211717,15.00022 L10.042343,45.000237 45.383359,45.144236 z"
+				Fill="{DynamicResource AccentBrushKey}" Height="30.144" Stretch="Fill" Canvas.Left="10" Canvas.Top="60" Width="80.384"/>
+        </Canvas>
+    </Viewbox>
+</UserControl>

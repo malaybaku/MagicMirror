@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="Baku.MagicMirror.Views.HelpDocumentView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Baku.MagicMirror.Views"
+             xmlns:v="clr-namespace:Baku.MagicMirror.Views"
+             mc:Ignorable="d" 
+             Background="{DynamicResource BackgroundBrushKey}"
+             Foreground="{DynamicResource ForegroundBrushKey}"
+             d:DesignHeight="500" d:DesignWidth="300">
+    <Grid>
+        <StackPanel>
+            <TextBlock Text="How to Use" Style="{StaticResource Heading1}" Margin="10"/>
+            <TextBlock Text="Magic Mirrorでは次にしめす3ステップの操作を行い、ロボットを制御します。"
+                       TextWrapping="Wrap" Margin="20,5"/>
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                <StackPanel>
+                    <TextBlock Text="1. ロボットとの接続" Style="{StaticResource Title}" Margin="10,20,10,5"/>
+                    <TextBlock TextWrapping="Wrap" Margin="20,5">
+                        <Hyperlink Command="{Binding Parent.OpenConnectionViewCommand}">
+                            <Run Text="「ロボットと接続する」"/>
+                        </Hyperlink>
+                        <Run Text="をクリックして接続ウィンドウを開き、指示に従ってロボットと接続します。" />
+                    </TextBlock>
+                    <TextBlock TextWrapping="Wrap" Margin="20,5">
+                        <Bold>
+                            <Run Text="NOTE:"/>
+                        </Bold>
+                        <Run Text="画面上部メニューバーの「接続」から「接続ウィンドウを開く」をクリックすることでも接続ウィンドウを表示できます。" />
+                    </TextBlock>
+
+                    <TextBlock Text="2. ツールを開く" Style="{StaticResource Title}" Margin="10,20,10,5"/>
+                    <TextBlock TextWrapping="Wrap" Margin="20,5">
+                        <Run Text="画面上部のメニューバーで「ウィンドウ」から使用したい機能のウィンドウをチェックし、表示します。"/>
+                    </TextBlock>
+
+                    <TextBlock Text="3. ツールの機能を使用する" Style="{StaticResource Title}" Margin="10,20,10,5"/>
+                    <TextBlock TextWrapping="Wrap" Margin="20,5">
+                        <Run Text="各ツールのGUIインターフェースを通じてロボットを操作します。同時に複数のツールを利用したい場合はウィンドウの分割機能を活用してください。"/>
+                    </TextBlock>
+                </StackPanel>
+            </ScrollViewer>
+
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Windows;
 
 using Baku.MagicMirror.Views;
-using Baku.MagicMirror.Models;
 
 namespace Baku.MagicMirror
 {
@@ -17,10 +16,8 @@ namespace Baku.MagicMirror
                 Path.Combine(Environment.CurrentDirectory, "qi_framework_dlls")
                 );
 
-            Helper.UIDispatcher = Dispatcher;
-
             //MetroRadiance標準だとMainWindow閉じるだけではアプリケーション終了しない気がするんだけど仕様？
-            MainWindow = new MagicMirrorWindow();
+            MainWindow = new MagicMirrorDockWindow();
             MainWindow.Closed += (_, __) => Shutdown();
             MainWindow.Show();
 

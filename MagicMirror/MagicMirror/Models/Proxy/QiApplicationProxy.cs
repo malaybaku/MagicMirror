@@ -1,7 +1,7 @@
 ﻿using System;
 
 using Baku.LibqiDotNet;
-using MagicMirror.Plugin;
+using Baku.MagicMirror.Plugin;
 
 namespace Baku.MagicMirror.Models
 {

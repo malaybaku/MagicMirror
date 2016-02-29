@@ -1,0 +1,135 @@
+﻿<UserControl x:Class="Baku.MagicMirror.Views.ChatDialogView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+             xmlns:controls="clr-namespace:Baku.MagicMirror.Views.Controls"
+             xmlns:vm="clr-namespace:Baku.MagicMirror.ViewModels"
+             mc:Ignorable="d" 
+             Background="{DynamicResource BackgroundBrushKey}"
+             d:DesignHeight="300" d:DesignWidth="400">
+    <UserControl.Resources>
+        <Style TargetType="ItemsControl" x:Key="ChatDialogStyle">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <ScrollViewer CanContentScroll="True">
+                            <ItemsPresenter/>
+                        </ScrollViewer>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel IsItemsHost="True"/>
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <DataTemplate DataType="{x:Type vm:RobotChatEntryViewModel}">
+            <TextBlock Foreground="{DynamicResource ForegroundBrushKey}"
+                       TextWrapping="Wrap">
+                <Run Text="{Binding Talker, Mode=OneTime}"/>
+                <Run Text=": "/>
+                <Run Text="{Binding Sentence, Mode=OneTime}"/>
+            </TextBlock>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:HumanChatEntryViewModel}">
+            <TextBlock Foreground="{DynamicResource ActiveForegroundBrushKey}"
+                TextWrapping="Wrap">
+                <Run Text="{Binding Talker, Mode=OneTime}"/>
+                <Run Text=": "/>
+                <Run Text="{Binding Sentence, Mode=OneTime}"/>
+                <Run Text="("/>
+                <Run Text="{Binding RecognitionPrecision, Mode=OneTime}"/>
+                <Run Text="%)"/>
+            </TextBlock>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Margin="2"
+                BorderBrush="{DynamicResource BorderBrushKey}" 
+                BorderThickness="1">
+            <Grid>
+                <ItemsControl Margin="3"
+                              ItemsSource="{Binding ChatEntries}"/>
+                <Button Margin="5"
+                        HorizontalAlignment="Right" 
+                        VerticalAlignment="Bottom"
+                        Foreground="{DynamicResource SemiActiveForegroundBrushKey}"
+                        Content="ログをクリア"
+                        Command="{Binding ClearLogCommand}" />
+            </Grid>
+        </Border>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <metro:PromptTextBox Grid.Column="0"
+                                 Margin="3"
+                                 VerticalAlignment="Center"
+                                 Prompt="ロボットに喋らせたい言葉"
+                                 Text="{Binding Sentence, UpdateSourceTrigger=PropertyChanged}">
+                <metro:PromptTextBox.InputBindings>
+                    <KeyBinding Key="Return" Command="{Binding SayCommand}"/>
+                </metro:PromptTextBox.InputBindings>
+            </metro:PromptTextBox>
+            <Button Grid.Column="1" Content="Say"
+                    VerticalAlignment="Center"
+                    Margin="5, 3" Width="50"
+                    Command="{Binding SayCommand}"/>
+            <Button Grid.Column="2" Content="A.Say"
+                    VerticalAlignment="Center"
+                    Margin="5, 3" Width="50"
+                    Command="{Binding AnimatedSayCommand}"/>
+        </Grid>
+        <Expander Grid.Row="2" Margin="5" Header="詳細設定">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0"
+                               Text="ロボットの言語を指定"
+                               VerticalAlignment="Center"
+                               Foreground="{DynamicResource ForegroundBrushKey}"/>
+                    <Button Grid.Column="1"
+                            VerticalAlignment="Center"
+                            Width="60"
+                            Margin="4,0"
+                            Content="日本語"
+                            Command="{Binding SetLanguageToJapaneseCommand}" />
+                    <Button Grid.Column="2"
+                            VerticalAlignment="Center"
+                            Width="60"
+                            Margin="4,0"
+                            Content="English"
+                            Command="{Binding SetLanguageToEnglishCommand}"/>
+                </Grid>
+                <TextBlock Grid.Row="1"
+                           VerticalAlignment="Center"
+                           Foreground="{DynamicResource ForegroundBrushKey}"
+                           Text="(速度等の設定増やす予定)"/>
+            </Grid>
+
+        </Expander>
+    </Grid>
+</UserControl>

@@ -1,19 +1,22 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.ComponentModel.Composition;
 using System.Windows.Media.Imaging;
+using System.Windows.Controls;
 using System.Reactive.Linq;
 
 using Baku.LibqiDotNet;
 using Baku.MagicMirror.Models;
+using Baku.MagicMirror.Plugin;
+using Baku.MagicMirror.Views;
 
 namespace Baku.MagicMirror.ViewModels
 {
-    internal class CameraMonitorViewModel : TabItemViewModel
+    [Export(typeof(IMagicMirrorPlugin))]
+    internal class CameraMonitorViewModel : MagicMirrorViewModel, IMagicMirrorPlugin
     {
-        public CameraMonitorViewModel(QiConnectionServiceViewModel connectionService) : base("カメラ")
+        public CameraMonitorViewModel()
         {
-            _connectionService = connectionService;
-
             //デフォ設定、まあこんなもんでしょう。
             SelectedCamera = CameraType.Top;
             SelectedColorSpace = CameraColorSpace.RGB;
@@ -21,7 +24,7 @@ namespace Baku.MagicMirror.ViewModels
             SelectedFps = 1;
         }
 
-        private readonly QiConnectionServiceViewModel _connectionService;
+        private IQiConnectionServiceProxy _connectionService;
 
         public CameraOptionsViewModel Options { get; } = new CameraOptionsViewModel();
 
@@ -99,6 +102,8 @@ namespace Baku.MagicMirror.ViewModels
 
         public async void StartMonitor()
         {
+            if (_monitorObserver != null) return;
+
             await Task.Run(() =>
             {
                 var vd = _connectionService
@@ -116,7 +121,7 @@ namespace Baku.MagicMirror.ViewModels
                     new QiInt32(SelectedFps)
                     ).GetString());
 
-                //上の設定は途中でGUIから変更食らうのでコッチはフリーズするのがポイント
+                //上の設定は途中でGUIから変更食らうのでコッチは固定するのがポイント
                 var camType = SelectedCamera;
                 var camRes = SelectedResolution;
                 var camCs = SelectedColorSpace;
@@ -164,5 +169,46 @@ namespace Baku.MagicMirror.ViewModels
             _monitorObserver?.Dispose();
             _monitorObserver = null;
         }
+
+
+        #region IMagicMirrorPlugin
+
+        public string Name { get; } = "Monitor";
+
+        public string JapaneseDescription { get; } = "カメラ情報をモニタリングします。";
+
+        public string EnglishDescription { get; } = "Monitors Camera Information";
+
+        public Guid Guid { get; } = new Guid("20de6d89-5c7d-433b-8313-092461dacf32");
+
+        public UserControl GuiContent { get; private set; }
+
+        public bool EnableAfterInitialize { get; } = false;
+
+        public void Initialize(IQiConnectionServiceProxy connectionService)
+        {
+            _connectionService = connectionService;
+            GuiContent = new CameraView { DataContext = this };
+        }
+
+        public void Enable()
+        {
+
+        }
+
+        public void Update()
+        {
+
+        }
+
+        public void Disable()
+        {
+            StopMonitor();
+        }
+
+        #endregion
+
+
+
     }
 }
