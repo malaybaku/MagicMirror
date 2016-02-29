@@ -1,0 +1,52 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:v="clr-namespace:Baku.MagicMirror.Views"
+                    xmlns:vm="clr-namespace:Baku.MagicMirror.ViewModels">
+    <DataTemplate DataType="{x:Type vm:ToolPaneViewModel}">
+        <Border BorderBrush="{DynamicResource BorderBrushKey}" BorderThickness="1,0,1,1">
+            <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled">
+                <ContentControl Content="{Binding Plugin.GuiContent}"/>
+            </ScrollViewer>
+        </Border>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:HomeDocumentViewModel}">
+        <Border BorderBrush="{DynamicResource BorderBrushKey}" BorderThickness="1,0,1,1">
+            <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled">
+                <v:HomeDocumentView />
+            </ScrollViewer>
+        </Border>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:HelpDocumentViewModel}">
+        <Border BorderBrush="{DynamicResource BorderBrushKey}" BorderThickness="1,0,1,1">
+            <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled">
+                <v:HelpDocumentView />
+            </ScrollViewer>
+        </Border>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:ConnectionPaneViewModel}">
+        <Border BorderBrush="{DynamicResource BorderBrushKey}" BorderThickness="1,0,1,1">
+            <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled">
+                <v:ConnectionPane />
+            </ScrollViewer>
+        </Border>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:QiSessionViewModel}">
+        <v:ConnectedSessionView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:ConnectionSearcherViewModel}">
+        <Border BorderBrush="{DynamicResource BorderBrushKey}" BorderThickness="1,0,1,1">
+            <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled">
+                <v:ConnectionSearcherView />
+            </ScrollViewer>
+        </Border>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:DetectedRobotViewModel}">
+        <v:DetectedRobotInfoView />
+    </DataTemplate>
+
+    <Style x:Key="ToolPaneMenuItemContainerStyle" TargetType="{x:Type MenuItem}">
+        <Setter Property="Header" Value="{Binding Title}"/>
+        <Setter Property="IsChecked" Value="{Binding IsVisible, Mode=TwoWay}"/>
+        <Setter Property="IsCheckable" Value="True"/>
+    </Style>
+</ResourceDictionary>
